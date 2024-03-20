@@ -46,6 +46,8 @@
 #include "nvds_360d_meta.h"
 #include "nvds_tracker_meta.h"
 #include "nvdsgstutils.h"
+#include "nvdspreprocess_meta.h"
+#include "nvds_roi_meta.h"
 
 namespace py = pybind11;
 

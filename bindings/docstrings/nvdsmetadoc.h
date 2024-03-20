@@ -46,6 +46,8 @@ namespace pydsdoc
             constexpr const char* NVDS_TRACKER_PAST_FRAME_META=R"pyds(metadata type to be set for tracking previous frames)pyds";
             constexpr const char* NVDS_AUDIO_BATCH_META=R"pyds(Specifies metadata type for formed audio batch.)pyds";
             constexpr const char* NVDS_AUDIO_FRAME_META=R"pyds(Specifies metadata type for audio frame.)pyds";
+            constexpr const char* NVDS_PREPROCESS_FRAME_META=R"pyds(Specifies metadata type for preprocess frame.)pyds";
+            constexpr const char* NVDS_PREPROCESS_BATCH_META=R"pyds(Specifies metadata type for formed preprocess batch.)pyds";
             constexpr const char* NVDS_RESERVED_META=R"pyds(Reserved field)pyds";
             constexpr const char* NVDS_GST_CUSTOM_META=R"pyds(metadata type to be set for metadata attached by nvidia gstreamer plugins before nvstreammux gstreamer plugin. It is set as user metadata inside :class:`NvDsFrameMeta`. NVIDIA specific gst meta are in the range from NVDS_GST_CUSTOM_META to NVDS_GST_CUSTOM_META + 4096)pyds";
             constexpr const char* NVDS_START_USER_META=R"pyds(NVDS_START_USER_META)pyds"; 
@@ -335,5 +337,20 @@ namespace pydsdoc
             constexpr const char* cast=R"pyds(cast given object/data to :class:`NvDsUserMeta`, call pyds.NvDsUserMeta.cast(data))pyds";
         }
 
+        namespace PreProcessBatchMetaDoc
+        {
+            constexpr const char* descr = R"pyds(
+                Holds information of metadata from the preprocess plugin.)pyds";
+
+            constexpr const char* cast=R"pyds(cast given object/data to :class:`NvDsPreProcessBatchMeta`, call pyds.NvDsPreProcessBatchMeta.cast(data))pyds";
+        }
+
+        namespace RoiMetaDoc
+        {
+            constexpr const char* descr = R"pyds(
+                Holds information of RoI metadata from the preprocess plugin.)pyds";
+
+            constexpr const char* cast=R"pyds(cast given object/data to :class:`NvDsRoiMeta`, call pyds.NvDsRoiMeta.cast(data))pyds";
+        }
     }
 }
