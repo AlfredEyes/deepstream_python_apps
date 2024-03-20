@@ -69,6 +69,10 @@ namespace pydeepstream {
                        pydsdoc::nvmeta::MetaTypeDoc::NVDS_AUDIO_BATCH_META)
                 .value("NVDS_AUDIO_FRAME_META", NVDS_AUDIO_FRAME_META,
                        pydsdoc::nvmeta::MetaTypeDoc::NVDS_AUDIO_FRAME_META)
+                .value("NVDS_PREPROCESS_FRAME_META", NVDS_PREPROCESS_FRAME_META,
+                       pydsdoc::nvmeta::MetaTypeDoc::NVDS_PREPROCESS_FRAME_META)
+                .value("NVDS_PREPROCESS_BATCH_META", NVDS_PREPROCESS_BATCH_META,
+                       pydsdoc::nvmeta::MetaTypeDoc::NVDS_PREPROCESS_BATCH_META)
                 .value("NVDS_RESERVED_META", NVDS_RESERVED_META,
                        pydsdoc::nvmeta::MetaTypeDoc::NVDS_RESERVED_META)
                 .value("NVDS_GST_CUSTOM_META", NVDS_GST_CUSTOM_META,
@@ -532,5 +536,60 @@ namespace pydeepstream {
                      },
                      py::return_value_policy::reference,
                      pydsdoc::nvmeta::UserMetaDoc::cast);
+
+
+        py::class_<GstNvDsPreProcessBatchMeta>(m, "NvDsPreProcessBatchMeta",
+                                 pydsdoc::nvmeta::PreProcessBatchMetaDoc::descr)
+                .def(py::init<>())
+
+                .def("cast",
+                     [](void *data) {
+                         return (GstNvDsPreProcessBatchMeta *) data;
+                     },
+                     py::return_value_policy::reference,
+                     pydsdoc::nvmeta::PreProcessBatchMetaDoc::cast)
+
+                .def("cast",
+                     [](size_t data) {
+                         return (GstNvDsPreProcessBatchMeta *) data;
+                     },
+                     py::return_value_policy::reference,
+                     pydsdoc::nvmeta::PreProcessBatchMetaDoc::cast)
+
+                .def_property_readonly("roi_vector",
+                                       [](const GstNvDsPreProcessBatchMeta &self) {
+                                           std::vector<const NvDsRoiMeta *> vroiMetas;
+                                           for (const auto &roi_meta : self.roi_vector) {
+                                               vroiMetas.push_back(
+                                                       &roi_meta);
+                                           }
+                                           return vroiMetas;
+                                       },
+                                       py::return_value_policy::reference);
+
+
+        py::class_<NvDsRoiMeta>(m, "NvDsRoiMeta",
+                                 pydsdoc::nvmeta::RoiMetaDoc::descr)
+                .def(py::init<>())
+                .def_readwrite("roi", &NvDsRoiMeta::roi)
+                .def_readwrite("frame_meta", &NvDsRoiMeta::frame_meta)
+                .def_readwrite("roi_user_meta_list",
+                               &NvDsRoiMeta::roi_user_meta_list)
+                .def_readwrite("classifier_meta_list",
+                               &NvDsRoiMeta::classifier_meta_list)
+
+                .def("cast",
+                     [](void *data) {
+                         return (NvDsRoiMeta *) data;
+                     },
+                     py::return_value_policy::reference,
+                     pydsdoc::nvmeta::RoiMetaDoc::cast)
+
+                .def("cast",
+                     [](size_t data) {
+                         return (NvDsRoiMeta *) data;
+                     },
+                     py::return_value_policy::reference,
+                     pydsdoc::nvmeta::RoiMetaDoc::cast);
     }
 }
